@@ -36,9 +36,10 @@ def minimax(board, player, depth):
     if depth == 0:
         return 0
     #check if the player is X
+    # computer is always O
     if player == 'X':
-        print('passando aqui #1')
         best_value = -math.inf
+        print('passando aqui #1')
         for i in range(4):
             for j in range(6):
                 if board[i][j] == ' ':
@@ -49,16 +50,19 @@ def minimax(board, player, depth):
         return best_value
     #check if the player is O
     if player == 'O':
-        print('passando aqui #2')
         best_value = math.inf
+        print('passando aqui #2')
         for i in range(4):
             for j in range(6):
                 if board[i][j] == ' ':
                     board[i][j] = player
+                    print('passando aqui #5')
                     value = minimax(board, 'X', depth-1)
                     board[i][j] = ' '
                     best_value = min(best_value, value)
         return best_value
+
+
     
 def ia(board, player, depth):
     #check if the player is X
@@ -72,11 +76,10 @@ def ia(board, player, depth):
                     board[i][j] = player
                     value = minimax(board, 'O', depth-1)
                     board[i][j] = ' '
+                    print(f'value: {value}, best_value: {best_value}, best_move: {best_move}')
                     if value > best_value:
                         best_value = value
                         best_move = (i, j)
-
-
 
         return best_move
     #check if the player is O
@@ -91,10 +94,13 @@ def ia(board, player, depth):
                     print('passando aqui #5')
                     value = minimax(board, 'X', depth-1)
                     board[i][j] = ' '
-                    print('passando aqui #6')
+                    print(f'value: {value}, best_value: {best_value}, best_move: {best_move}')
                     if value < best_value:
                         best_value = value
                         best_move = (i, j)
 
-
         return best_move
+
+
+
+

@@ -93,7 +93,8 @@ if play_against == 'c':
         print_board(board)
         print('Computer')
         while True:
-            col, line = ia(board, computer, deep)
+            line, col = ia(board, computer, deep)
+            print('Computer chose line: ', line, ' and column: ', col)
             if play(board, computer, col, line):
                 break
         if check_win(board, computer):
