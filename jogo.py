@@ -93,7 +93,7 @@ if play_against == 'c':
         print_board(board)
         print('Computer')
         while True:
-            _, move = minimax(board, deep, True, computer)
+            score, move = alphabeta(board, deep, -math.inf, math.inf, True, computer)
             col = move[0]
             line = move[1]
             if play(board, computer, col, line):
