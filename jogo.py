@@ -93,10 +93,13 @@ if play_against == 'c':
         print_board(board)
         print('Computer')
         while True:
-            line, col = ia(board, computer, deep)
-            print('Computer chose line: ', line, ' and column: ', col)
+            _, move = minimax(board, deep, True, computer)
+            col = move[0]
+            line = move[1]
             if play(board, computer, col, line):
                 break
+            else:
+                print('Invalid move, try again')
         if check_win(board, computer):
             print_board(board)
             print('Computer won!')
