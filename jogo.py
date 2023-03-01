@@ -2,6 +2,7 @@ import random
 from ia import *
 from ai_alphabeta import *
 from ai_minimax import *
+from ia_tt import alphabeta_tt
 import numpy as np
 import math
 import os
@@ -74,6 +75,7 @@ if play_against == 'c':
     deep = int(input('Choose the depth of the search tree: '))
     player = 'X'
     computer = 'O'
+    transposition_table = {}
 
     while True:
         print_board(board)
@@ -96,7 +98,7 @@ if play_against == 'c':
         print_board(board)
         print('Computer')
         while True:
-            score, move = alphabeta(board, deep, -math.inf, math.inf, True, computer)
+            score, move = alphabeta_tt(board, deep, -math.inf, math.inf, True, computer, transposition_table)
             print('Score: ', score)
             col = move[0]
             line = move[1]
@@ -118,7 +120,8 @@ if play_against == 's':
     print('Choeose witch algorithm you want to use as X')
     print('1 - Minimax')
     print('2 - Alpha Beta')
-    print('3 - Alpha Beta with Transposition Table')
+    print('3 - Alpha Beta with evaluation function')
+    print('4 - Alpha Beta with Transposition Table')
 
     computer1 = input('Choose the algorithm: ')
     deep1 = int(input('Choose the depth of the search tree: '))
@@ -126,13 +129,16 @@ if play_against == 's':
     print('Choeose witch algorithm you want to use as O')
     print('1 - Minimax')
     print('2 - Alpha Beta')
-    print('3 - Alpha Beta with Transposition Table')
+    print('3 - Alpha Beta with evaluation function')
+    print('4 - Alpha Beta with Transposition Table')
 
     computer2 = input('Choose the algorithm: ')
     deep2 = int(input('Choose the depth of the search tree: '))
 
     player1 = 'X'
     player2 = 'O'
+    transposition_table1 = {}
+    transposition_table2 = {}
 
     while True:
         print_board(board)
@@ -144,6 +150,8 @@ if play_against == 's':
                 score, move = alphabeta_old(board, deep1, -math.inf, math.inf, True, player1)
             if computer1 == '3':
                 score, move = alphabeta(board, deep1, -math.inf, math.inf, True, player1)
+            if computer1 == '4':
+                score, move = alphabeta_tt(board, deep1, -math.inf, math.inf, True, player1, transposition_table1)
             col = move[0]
             line = move[1]
             if play(board, player1, col, line):
@@ -167,6 +175,8 @@ if play_against == 's':
                 score, move = alphabeta_old(board, deep2, -math.inf, math.inf, True, player2)
             if computer2 == '3':
                 score, move = alphabeta(board, deep2, -math.inf, math.inf, True, player2)
+            if computer1 == '4':
+                score, move = alphabeta_tt(board, deep1, -math.inf, math.inf, True, player1, transposition_table1)
             col = move[0]
             line = move[1]
             if play(board, player2, col, line):

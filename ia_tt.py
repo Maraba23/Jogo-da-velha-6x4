@@ -4,25 +4,7 @@ import math
 import os
 from gamefunctions import create_board, print_board, check_win, check_draw, check_valid, play
 
-'''
-This game consists in a Tic Tac Toe game, where the player plays against the computer.
-
-but it is not a simple Tic Tac Toe game, it is a 4x6 Tic Tac Toe game, where the player needs to make a line of 4 X's or O's to win.
-
-The player can choose to play as X or O, and the computer will always play as the other one.
-
-you still have the option to play against another player
-
-now we gonna a ia using minimax algorithm
-
-the algorithm receives a board and a player and a depth
-
-the depth is the number of moves that the algorithm will see ahead
-
-the algorithm will return the best move that the player can do for that board and that depth
-'''
-
-def alphabeta(board, depth, alpha, beta, maximizing_player, player):
+def alphabeta_tt(board, depth, alpha, beta, maximizing_player, player, transposition_table):
     """
     The minimax algorithm with alpha-beta pruning and futility pruning to find the best move for the player.
 
@@ -33,13 +15,17 @@ def alphabeta(board, depth, alpha, beta, maximizing_player, player):
         beta: the best value for the minimizing player found so far
         maximizing_player: whether the current player is the maximizing player or not
         player: the player for which we are finding the best move
+        transposition_table: a dictionary that stores previously seen board states and their scores
 
     Returns:
         a tuple (score, move) where score is the score for the current move and move is the optimal move for the player
     """
 
     # Base cases
-    if depth == 0:
+    board_str = ''.join([''.join(row) for row in board])
+    if board_str in transposition_table:
+        return transposition_table[board_str]
+    elif depth == 0:
         return evaluate(board, player), None
 
     # Initialize the best score and move
@@ -57,9 +43,8 @@ def alphabeta(board, depth, alpha, beta, maximizing_player, player):
                 # Make the move
                 board[row][col] = player
                 # Recursively call alphabeta on the next depth
-                score, _ = alphabeta(board, depth-1, alpha, beta, not maximizing_player, 'X' if player == 'O' else 'O')
+                score, _ = alphabeta_tt(board, depth-1, alpha, beta, not maximizing_player, 'X' if player == 'O' else 'O', transposition_table)
                 # Undo the move
-                # print(board)
                 board[row][col] = ' '
                 # Update the best score and move
                 if maximizing_player:
@@ -74,13 +59,17 @@ def alphabeta(board, depth, alpha, beta, maximizing_player, player):
                     beta = min(beta, best_score)
                 # Prune the search if alpha >= beta
                 if alpha >= beta:
+                    transposition_table[board_str] = (best_score, best_move)
                     return best_score, best_move
                 # Futility pruning
                 if maximizing_player and best_score >= beta:
+                    transposition_table[board_str] = (best_score, best_move)
                     return best_score, best_move
                 elif not maximizing_player and best_score <= alpha:
+                    transposition_table[board_str] = (best_score, best_move)
                     return best_score, best_move
 
+    transposition_table[board_str] = (best_score, best_move)
     return best_score, best_move
 
 def evaluate(board, player):
@@ -205,5 +194,3 @@ def evaluate(board, player):
                 score -= 0.01
 
     return score
-
-
