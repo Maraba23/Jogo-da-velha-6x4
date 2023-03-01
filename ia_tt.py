@@ -43,6 +43,7 @@ def alphabeta_tt(board, depth, alpha, beta, maximizing_player, player, transposi
                 # Make the move
                 board[row][col] = player
                 # Recursively call alphabeta on the next depth
+                print(board)
                 score, _ = alphabeta_tt(board, depth-1, alpha, beta, not maximizing_player, 'X' if player == 'O' else 'O', transposition_table)
                 # Undo the move
                 board[row][col] = ' '
@@ -106,7 +107,7 @@ def evaluate(board, player):
                 score += 0.01
 
             if pieces.count('X' if player == 'O' else 'O') == 4:
-                score -= 10000
+                score -= 1000
             elif pieces.count('X' if player == 'O' else 'O') == 3 and pieces.count(' ') == 1:
                 score -= 10
             elif pieces.count('X' if player == 'O' else 'O') == 2 and pieces.count(' ') == 2:
@@ -132,7 +133,7 @@ def evaluate(board, player):
                 score += 0.01
 
             if pieces.count('X' if player == 'O' else 'O') == 4:
-                score -= 10000
+                score -= 1000
             elif pieces.count('X' if player == 'O' else 'O') == 3 and pieces.count(' ') == 1:
                 score -= 10
             elif pieces.count('X' if player == 'O' else 'O') == 2 and pieces.count(' ') == 2:
@@ -158,7 +159,7 @@ def evaluate(board, player):
                 score += 0.01
 
             if pieces.count('X' if player == 'O' else 'O') == 4:
-                score -= 10000
+                score -= 1000
             elif pieces.count('X' if player == 'O' else 'O') == 3 and pieces.count(' ') == 1:
                 score -= 10
             elif pieces.count('X' if player == 'O' else 'O') == 2 and pieces.count(' ') == 2:
@@ -172,7 +173,7 @@ def evaluate(board, player):
         for col in range(3, 6):
             pieces = [board[row+i][col-i] for i in range(4)]
             if pieces.count(player) == 4:
-                score += 10000
+                score += 1000
             elif pieces.count(player) == 3 and pieces.count(' ') == 1:
                 score += 10
             elif pieces.count(player) == 2 and pieces.count(' ') == 2:
