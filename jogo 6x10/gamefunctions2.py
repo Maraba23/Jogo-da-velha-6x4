@@ -1,5 +1,4 @@
 import random
-from ia import *
 import numpy as np
 import math
 import os
@@ -11,33 +10,33 @@ def create_board():
 def print_board(board):
     #print the board
     for i in range(6):
-        print('---------------------------------------------')
+        print('-----------------------------------------')
         out = '| '
         for j in range(10):
             out += str(board[i][j]) + ' | '
         print(out)
-    print('---------------------------------------------')
+    print('-----------------------------------------')
 
 def check_win(board, player):
     #check if the player won
     #check the rows
-    for i in range(6):
-        for j in range(7):
-            if board[i][j] == player and board[i][j+1] == player and board[i][j+2] == player and board[i][j+3] == player:
+    for row in range(len(board)):
+        for col in range(len(board[row])-3):
+            if board[row][col] == player and board[row][col+1] == player and board[row][col+2] == player and board[row][col+3] == player:
                 return True
     #check the columns
-    for i in range(10):
-        for j in range(3):
-            if board[j][i] == player and board[j+1][i] == player and board[j+2][i] == player and board[j+3][i] == player:
+    for row in range(len(board)-3):
+        for col in range(len(board[row])):
+            if board[row][col] == player and board[row+1][col] == player and board[row+2][col] == player and board[row+3][col] == player:
                 return True
     #check the diagonals
-    for i in range(3):
-        for j in range(7):
-            if board[i][j] == player and board[i+1][j+1] == player and board[i+2][j+2] == player and board[i+3][j+3] == player:
+    for row in range(len(board)-3):
+        for col in range(len(board[row])-3):
+            if board[row][col] == player and board[row+1][col+1] == player and board[row+2][col+2] == player and board[row+3][col+3] == player:
                 return True
-    for i in range(3):
-        for j in range(7, 10):
-            if board[i][j] == player and board[i+1][j-1] == player and board[i+2][j-2] == player and board[i+3][j-3] == player:
+    for row in range(len(board)-3):
+        for col in range(len(board[row])-3):
+            if board[row][col+3] == player and board[row+1][col+2] == player and board[row+2][col+1] == player and board[row+3][col] == player:
                 return True
     return False
 
