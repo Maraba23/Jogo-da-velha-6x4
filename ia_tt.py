@@ -43,7 +43,7 @@ def alphabeta_tt(board, depth, alpha, beta, maximizing_player, player, transposi
                 # Make the move
                 board[row][col] = player
                 # Recursively call alphabeta on the next depth
-                print(board)
+                # print(board)
                 score, _ = alphabeta_tt(board, depth-1, alpha, beta, not maximizing_player, 'X' if player == 'O' else 'O', transposition_table)
                 # Undo the move
                 board[row][col] = ' '
