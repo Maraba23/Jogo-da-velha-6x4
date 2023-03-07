@@ -91,87 +91,87 @@ def get_reward(board, next_board):
         for col in range(len(board[row]) - 3):
             pieces = [board[row][col], board[row][col+1], board[row][col+2], board[row][col+3]]
             if pieces.count('O') == 4:
-                reward = WIN_REWARD*2
+                reward += WIN_REWARD*2
             elif pieces.count('O') == 3 and pieces.count(' ') == 1:
-                reward = WIN_REWARD
+                reward += WIN_REWARD
             elif pieces.count('O') == 2 and pieces.count(' ') == 2:
-                reward = WIN_REWARD/2
+                reward += WIN_REWARD/2
             elif pieces.count('O') == 1 and pieces.count(' ') == 3:
-                reward = WIN_REWARD/4
+                reward += WIN_REWARD/4
             
             if pieces.count('X') == 4:
-                reward = LOSE_REWARD/4
+                reward += LOSE_REWARD/4
             elif pieces.count('X') == 3 and pieces.count(' ') == 1:
-                reward = LOSE_REWARD/2
+                reward += LOSE_REWARD/2
             elif pieces.count('X') == 2 and pieces.count(' ') == 2:
-                reward = LOSE_REWARD
+                reward += LOSE_REWARD
             elif pieces.count('X') == 1 and pieces.count(' ') == 3:
-                reward = LOSE_REWARD*2
+                reward += LOSE_REWARD*2
 
     # check columns
     for row in range(len(board) - 3):
         for col in range(len(board[row])):
             pieces = [board[row][col], board[row+1][col], board[row+2][col], board[row+3][col]]
             if pieces.count('O') == 4:
-                reward = WIN_REWARD*2
+                reward += WIN_REWARD*2
             elif pieces.count('O') == 3 and pieces.count(' ') == 1:
-                reward = WIN_REWARD
+                reward += WIN_REWARD
             elif pieces.count('O') == 2 and pieces.count(' ') == 2:
-                reward = WIN_REWARD/2
+                reward += WIN_REWARD/2
             elif pieces.count('O') == 1 and pieces.count(' ') == 3:
-                reward = WIN_REWARD/4
+                reward += WIN_REWARD/4
 
             if pieces.count('X') == 4:
-                reward = LOSE_REWARD/4
+                reward += LOSE_REWARD/4
             elif pieces.count('X') == 3 and pieces.count(' ') == 1:
-                reward = LOSE_REWARD/2
+                reward += LOSE_REWARD/2
             elif pieces.count('X') == 2 and pieces.count(' ') == 2:
-                reward = LOSE_REWARD
+                reward += LOSE_REWARD
             elif pieces.count('X') == 1 and pieces.count(' ') == 3:
-                reward = LOSE_REWARD*2
+                reward += LOSE_REWARD*2
 
     # check diagonals
     for row in range(len(board) - 3):
         for col in range(len(board[row]) - 3):
             pieces = [board[row][col], board[row+1][col+1], board[row+2][col+2], board[row+3][col+3]]
             if pieces.count('O') == 4:
-                reward = WIN_REWARD*2
+                reward += WIN_REWARD*2
             elif pieces.count('O') == 3 and pieces.count(' ') == 1:
-                reward = WIN_REWARD
+                reward += WIN_REWARD
             elif pieces.count('O') == 2 and pieces.count(' ') == 2:
-                reward = WIN_REWARD/2
+                reward += WIN_REWARD/2
             elif pieces.count('O') == 1 and pieces.count(' ') == 3:
-                reward = WIN_REWARD/4
+                reward += WIN_REWARD/4
 
             if pieces.count('X') == 4:
-                reward = LOSE_REWARD/4
+                reward += LOSE_REWARD/4
             elif pieces.count('X') == 3 and pieces.count(' ') == 1:
-                reward = LOSE_REWARD/2
+                reward += LOSE_REWARD/2
             elif pieces.count('X') == 2 and pieces.count(' ') == 2:
-                reward = LOSE_REWARD
+                reward += LOSE_REWARD
             elif pieces.count('X') == 1 and pieces.count(' ') == 3:
-                reward = LOSE_REWARD*2
+                reward += LOSE_REWARD*2
 
     for row in range(len(board) - 3):
         for col in range(3, len(board[row])):
             pieces = [board[row][col], board[row+1][col-1], board[row+2][col-2], board[row+3][col-3]]
             if pieces.count('O') == 4:
-                reward = WIN_REWARD*2
+                reward += WIN_REWARD*2
             elif pieces.count('O') == 3 and pieces.count(' ') == 1:
-                reward = WIN_REWARD
+                reward += WIN_REWARD
             elif pieces.count('O') == 2 and pieces.count(' ') == 2:
-                reward = WIN_REWARD/2
+                reward += WIN_REWARD/2
             elif pieces.count('O') == 1 and pieces.count(' ') == 3:
-                reward = WIN_REWARD/4
+                reward += WIN_REWARD/4
 
             if pieces.count('X') == 4:
-                reward = LOSE_REWARD/4
+                reward += LOSE_REWARD/4
             elif pieces.count('X') == 3 and pieces.count(' ') == 1:
-                reward = LOSE_REWARD/2
+                reward += LOSE_REWARD/2
             elif pieces.count('X') == 2 and pieces.count(' ') == 2:
-                reward = LOSE_REWARD
+                reward += LOSE_REWARD
             elif pieces.count('X') == 1 and pieces.count(' ') == 3:
-                reward = LOSE_REWARD*2
+                reward += LOSE_REWARD*2
 
 
     return reward
